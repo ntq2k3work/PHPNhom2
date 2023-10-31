@@ -1,0 +1,21 @@
+RewriteEngine On
+RewriteCond %[REQUEST_FILENAME] !-d
+RewriteCond %[REQUEST_FILENAME] !-f
+RewriteRule  ^(.+)$ index.php/$1 [L,QSA]
+
+ErrorDocument 404 "Looix"
+#Chuyển php sang html
+#RewriteRule ^(.*).html$ $1.php [R=301,L]
+#Che id sản phẩm
+#RewriteRule ^product-([0-9]+).html$ product.php?id=$1
+#SEO tên sản phẩm
+#RewriteRule ^product/([a-zA-Z0-9_-]+)/([0-9]+).html$ product.php?id=$2
+
+<Files .htaccess>
+
+Order Allow,Deny
+
+Deny from all
+
+</Files>
+

@@ -1,0 +1,248 @@
+:root{
+    --height:60px;
+    --width_center: 1400px;
+    --height_shopping:60px;
+    --background_white:#fff;
+    --background_near_white:#f1f1f1;
+    --color_black:#000;
+    --color_white:#fff;
+}
+.cl_ccc{
+    color: #ccc !important;
+}
+.cl_old{
+    opacity: 0.65;
+}
+#slider{
+    margin-top: var(--height);
+    position: relative;
+}
+
+.pre_next_icon{
+    position: absolute;
+    top: 50%;
+    font-size: 16px;
+    padding: 20px 25px;
+    background-color: var(--background_white);
+    border-radius: 50%;
+    color: var( --color_black);
+    cursor: pointer;
+    transform: translateY(-50%);
+    z-index: 10;
+
+}
+.slider_pre_next > .fa-angle-left{
+    left: 0;
+}
+.slider_pre_next > .fa-angle-right{
+    right: 0;
+}
+.pre_next_icon:hover{
+    padding: 22px 27px;
+    background-color: #f3ecec;
+}
+.slider_dots{
+    /* background-color: #ccc; */
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+.slider_dots li{
+    display: inline-block;
+}
+.slider_dots_icon{
+    color: var( --color_black);
+    margin: 0 4px;
+}
+
+.slider_wrapper{
+    overflow: hidden;
+}
+.slider_main{
+    transition: transform 0.25s linear;
+}
+.slider_item{
+    padding-top: 50%;
+    width: 100%;
+    flex: 1 0 100%;
+    width: 100%;
+    height: 100%;
+}
+.slider_1{
+    background-image: url(https://mauweb.monamedia.net/dongho/wp-content/uploads/2018/03/slide1.jpg);
+    background-repeat: no-repeat;
+    display: block;
+}
+.slider_2{
+    background-image: url(https://mauweb.monamedia.net/dongho/wp-content/uploads/2018/03/slide2.jpg);
+    background-repeat: no-repeat;
+}
+.slider_3{
+    background-image: url(https://mauweb.monamedia.net/dongho/wp-content/uploads/2018/03/slide3.jpg);
+    background-repeat: no-repeat;
+}
+
+/* Item */
+.section_header{
+    position: relative;
+}
+.section_header::after{
+    content: "";
+    display: block;
+    height: 1px;
+    width: 100px;
+    background-color: orange;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.55;
+    text-decoration: dashed;
+}
+.list_item{
+    flex-wrap: wrap;
+    /* max-height: 817px; */
+    overflow: hidden;
+}
+
+.item{
+    position: relative;
+    min-height: 409px;
+    padding: 9px 12px;
+
+}
+.item > a{
+    text-decoration: none;
+    color: (var(--color_black));
+    font-size: 16px;
+    display: block;
+    height: 390px;
+}
+.item > a:hover{
+    border-style: dashed;
+    border:1px dotted orange;
+}
+.sale_down{
+    position: absolute;
+    left: 6%;
+    top: 4%;
+    background-color: orange;
+    border-radius: 50%;
+    padding: 16px 6px;
+    font-weight: bold;
+    color: var(--color_white);
+}
+.item_add_cart{
+    position: absolute;
+    bottom: 36%;
+    left: 12%;
+    font-size: 30px;
+    display: none;
+    outline: none;
+    border: none;
+    background-color: #fff;
+}
+.item:hover .item_add_cart{
+    display: block;
+    animation-name: add_cart;
+    animation-duration: 1s;
+}
+@keyframes add_cart {
+    from{
+        transform: translateY(50px);
+        opacity: 0.4;
+    }to{
+         transform: translateY(0px);
+         opacity: 1;
+     }
+}
+.item_main{
+
+}
+.item_img > img{
+    aspect-ratio: 1/1;
+}
+.item_categories{
+    opacity: 0.65;
+    font-size: 12px;
+    /* position: relative; */
+}
+
+.item_name{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+.item_cost{
+
+}
+.item_cost_old{
+
+}
+.item_cost_new{
+
+}
+/* BR */
+.break{
+    margin: 16px 0 60px 0;
+    /* position: relative; */
+}
+.break_1{
+    background-image: url(https://mauweb.monamedia.net/dongho/wp-content/uploads/2018/03/movement-gears-background.jpg);
+    background-size: cover;
+    color: var(--color_white);
+    height: 160px;
+}
+.break_2{
+    width: 100%;
+    /* height: 160px; */
+    /* overflow: hidden; */
+}
+.break_2_section{
+
+}
+/* Phần 1 */
+.section_wapper{
+    /* overflow: hidden; */
+    position: relative;
+}
+.section_wapper_pre_next{
+    position: absolute;
+    top: 50%;
+    font-size: 16px;
+    padding: 20px 25px;
+    background-color: orange;
+    border-radius: 50%;
+    color: var( --color_black);
+    cursor: pointer;
+    transform: translateY(-50%);
+    z-index: 10;
+    opacity: 0.85;
+}
+.section_wapper_next_icon_left{
+    left: -5%;
+    z-index: 1;
+}
+.section_wapper_next_icon_right{
+    right: -5%;
+    z-index: 1;
+
+}
+.section_wapper_pre_next:hover{
+    opacity: 1;
+}
+.couple_clock{
+    overflow: unset;
+    transition: transform 0.25s linear;
+}
+.couple_container{
+    overflow: hidden;
+}
+.section_item_slide{
+    flex-wrap: nowrap !important;
+}
+.section_item_slide > li{
+    flex: 1 0 25%;
+}
