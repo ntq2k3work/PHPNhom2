@@ -4,14 +4,14 @@ class errorMess
 {
     public function errorNotFound(): void
     {
-        echo "<h2> Lỗi </h2>";
+        echo "Không thấy trang</br>";
     }
     public function Block(): void
     {
-        echo "Không thể truy cập trang này !";
+        echo "Chặn</br>";
     }
     public function Loi(): void
     {
-        echo "Không thể truy cập trang này Không thể truy cập trang này !";
+        echo "Lỗi</br>";
     }
 }

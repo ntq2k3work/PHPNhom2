@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <?php require_once "app/view/layouts/cdn.php" ?>
-</head>
-<body>
-    	<!--Header-->
-		<section class="navbar navbar-dark navbar-expand-lg bg-dark fixed-top">
+<!--Header-->
+<section class="navbar navbar-dark navbar-expand-lg bg-dark fixed-top" style="height: var(--height);">
 		  <div class="container-fluid">
 			<button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" style="color: #ffff">
 			  <i class="bi bi-list fs-1"></i>
@@ -23,20 +17,20 @@
 					<a class="nav-link me-3" href="#">Giới thiệu</a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-link me-3" href="/list/Dong-ho-nam">Đồng hồ nam</a>
+					<a class="nav-link me-3" href="/product/list/Dong-Ho-Nam">Đồng hồ nam</a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-link me-3" href="/list/Dong-ho-nu">Đồng hồ nữ</a>
+					<a class="nav-link me-3" href="/product/list/Dong-Ho-Nu">Đồng hồ nữ</a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-link me-3" href="/list/Dong-ho-doi">Đồng hồ đôi</a>
+					<a class="nav-link me-3" href="/product/list/Dong-Ho-Doi">Đồng hồ đôi</a>
 				  </li>
-				  <li class="nav-item dropdown">
-					<a class="nav-link me-3" href="/list/Phu-kien" role="button" data-bs-toggle="dropdown" aria-expanded="false">Phụ kiện</a>				
-				  <ul class="dropdown-menu dropdown-menu-dark">
-					<li><a class="dropdown-item" href="#">Mục 1</a></li>
-					<li><a class="dropdown-item" href="#">Mục 2</a></li>
-					<li><a class="dropdown-item" href="#">Mục 3</a></li>
+				  <li class="nav-item dropdown nav_menu_2">
+					<a class="nav-link me-3 nav_menu_2" href="/product/list/Phu-kien">Phụ kiện</a>				
+				  <ul class="dropdown-menu dropdown-menu-dark " >
+					<li><a class="dropdown-item p-3 " style="min-width: 200px;" href="/product/list/Phu-kien/HopDongHo">Hộp đồng hồ</a></li>
+					<li><a class="dropdown-item p-3 " style="min-width: 200px;" href="/product/list/Phu-kien/DayDa">Dây da ZRC</a></li>
+					<li><a class="dropdown-item p-3 " style="min-width: 200px;" href="/product/list/Phu-kien/KhacLazer">Khắc lazer lên đồng hồ</a></li>
 				  </ul>
 				</li>
 				  <li class="nav-item">
@@ -71,9 +65,9 @@
 			  </div>
 			</div>
 		  </div>
-		  
+		  <style>
+			.nav_menu_2:hover .dropdown-menu{
+				display: block;
+			}
+		  </style>
 		</section>
-		
-	<!--End header-->
-</body>
-</html>

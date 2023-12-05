@@ -1,7 +1,7 @@
 <section>
 		<!--Footer-->
 		<div class="text-bg-dark">
-			<div class="row">
+			<div class="row" style="margin-right: 0;">
 				<div class="col text-center my-5"><h3>Điều hướng</h3></div>
 				<div class="col my-5 px-5 text-center border border-light border-top-0 border-bottom-0">
 					<h1>HOME</h1>

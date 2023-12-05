@@ -16,10 +16,13 @@ class BaseController
         }
         return false;
     }
-    public function render($view)
+    public function render($view,$data = [],$mainContent = "")
     {
+        extract($data); //Đổi key của mảng thành biến
         if(file_exists('app/view/'.$view.'.php')){
             require 'app/view/'.$view.'.php';
+        }else{
+            echo "Không thấy file";
         }
     }
 }

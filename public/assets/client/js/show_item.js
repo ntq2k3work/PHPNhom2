@@ -38,4 +38,4 @@ preItem.addEventListener('click',function(){
 });
 setInterval(function (){
     nextItem.addEventListener('click',move(1));
-},1500);
+},2500);
