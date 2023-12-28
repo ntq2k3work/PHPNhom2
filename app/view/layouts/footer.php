@@ -1,4 +1,4 @@
-<section>
+<section >
 		<!--Footer-->
 		<div class="text-bg-dark">
 			<div class="row" style="margin-right: 0;">
@@ -13,16 +13,17 @@
 				</div>
 				<div class="col my-5 ms-3">
 					<h3>Thông tin liên hệ</h3>
-					319 c16 Lý Thường Kiệt, Phường 15, Quận 11, Tp.HCM<br>
+					<p>319 c16 Lý Thường Kiệt, Phường 15, Quận 11, Tp.HCM</p><br>
 
-					0126 922 0162<br>
+					<p>0126 922 0162<br></p>
 
-					demonhunter@gmail.com<br>
-					mon@mona.media<br>
+					<p>demonhunter@gmail.com</p>
+					<p>mon@mona.media</p>
 
-					demonhunterp
 				</div>
 			</div>
 			<div class="text-center">© All rights reserved. Thiết kế website MonaMedia Mona Media</div>
 		</div>
 </section>
+<script src="/public/assets/client/js/adjust_quantity.js"></script>
+<script src="/public/assets/client/js/update_quantity.js"></script>

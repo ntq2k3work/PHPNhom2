@@ -1,4 +1,3 @@
-<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,9 +26,14 @@
 <body>
     <?php 
         if(isset($_SESSION['success'])){
-            require "./notification/noti_success.php";
+            require "app/view/admin/notification/noti_success.php";
             unset($_SESSION['success']);
         }
+        if(isset($_SESSION['ERROR'])){
+            require "app/view/admin/notification/noti_error.php";
+            unset($_SESSION['ERROR']);
+        }
+
     ?>
     <div class="limiter">
         <div class="container-login100">
@@ -41,10 +45,10 @@
                     <span class="login100-form-title">
                         <b>KHÔI PHỤC MẬT KHẨU</b>
                     </span>
-                    <form action="./process/process_forgot.php" method="post">
+                    <form action="/admin/repassword" method="post">
                         <div class="wrap-input100 validate-input"
                             data-validate="Bạn cần nhập đúng thông tin như: ex@abc.xyz">
-                            <input class="input100" type="text" placeholder="Nhập email" name="emailInput"
+                            <input class="input100" type="email" placeholder="Nhập email" name="emailInput"
                                 id="emailInput" value="" />
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">

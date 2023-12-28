@@ -23,26 +23,25 @@
 
 <!-- PHP -->
 <?php 
-      // require "checkLog.php";
-      // require "../config/connect.php";
-      // require "../process/getUser.php";
-      // if(isset($_GET['id'])){
-      //   $id = $_GET['id'];
-      //   $user_reset = "select * from tbl_dangky where id_khachhang = '$id'";
-      //   $result = mysqli_query($connect,$user_reset);
-      //   $row_reset = mysqli_fetch_array($result);
-      //   if(mysqli_num_rows($result)){
-      //     require "../notification/editUser.php";
-      //   }else{
-      //     $_SESSION['ERROR'] = "ID này không tồn tại !";
-      //     require ".././notification/noti_error.php";
-      //     unset($_SESSION['ERROR']);
-      //   }
-      // }
-      // if(isset($_SESSION['success'])){
-      //     require ".././notification/noti_success.php";
-      //     unset($_SESSION['success']);
-      // }
+      if(!isset($_SESSION['acAdmin'])){
+        header("location:/admin");
+        exit;
+      }
+  ?>
+<?php 
+
+      if(!empty($UpdateCustomer)){
+        if(mysqli_num_rows($UpdateCustomer)){
+        }else{
+          $_SESSION['ERROR'] = "ID này không tồn tại !";
+          require "app/view/admin/notification/noti_error.php";
+          unset($_SESSION['ERROR']);
+        }
+      }
+      if(isset($_SESSION['success'])){
+        require "app/view/admin/notification/noti_success.php";
+          unset($_SESSION['success']);
+      }
 ?>
 <!--  -->
 <body onload="time()" class="app sidebar-mini rtl">
@@ -55,7 +54,7 @@
 
 
       <!-- User Menu-->
-      <li><a class="app-nav__item" href="/index.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+      <li><a class="app-nav__item" href="/admin/logout"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
       </li>
     </ul>
@@ -71,18 +70,18 @@
     </div>
     <hr>
     <ul class="app-menu">
-      <li><a class="app-menu__item " href="/admin"><i class='app-menu__icon bx bx-tachometer'></i><span
-            class="app-menu__label">Bảng điều khiển</span></a></li>
-      <li><a class="app-menu__item active" href="admin/QuanLyKH"><i class='app-menu__icon bx bx-id-card'></i> <span
+      <li><a class="app-menu__item " href="/admin/dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
+            class="app-menu__label">Thống kê</span></a></li>
+      <li><a class="app-menu__item active" href="/admin/QuanLyKH"><i class='app-menu__icon bx bx-id-card'></i> <span
             class="app-menu__label ">Quản lý khách hàng</span></a></li>
 
-      <li><a class="app-menu__item" href="admin/QuanLySP"><i
+      <li><a class="app-menu__item" href="/admin/QuanLySP"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
       </li>
-      <li><a class="app-menu__item" href="admin/QuanLyDonHang"><i class='app-menu__icon bx bx-task'></i><span
+      <li><a class="app-menu__item" href="/admin/QuanLyDonHang"><i class='app-menu__icon bx bx-task'></i><span
             class="app-menu__label">Quản lý đơn hàng</span></a></li>
-      <li><a class="app-menu__item" href="admin/QuanLyDanhMuc"><i class='app-menu__icon bx bx-dollar'></i><span
-            class="app-menu__label">Quản lý danh mục</span></a></li>
+      <li><a class="app-menu__item" href="/admin/QuanLyThuongHieu"><i class='app-menu__icon bx bx-dollar'></i><span
+            class="app-menu__label">Quản lý thương hiệu</span></a></li>
 
     </ul>
   </aside>
@@ -102,10 +101,10 @@
             <div class="row element-button">
               <div class="col-sm-2">
 
-                <!-- <a class="btn btn-add btn-sm" href="form-add-nhan-vien.html" title="Thêm"><i class="fas fa-plus"></i>
+                <a class="btn btn-add btn-sm" href="/admin/QuanLyKH/insertUser=true" title="Thêm"><i class="fas fa-plus"></i>
                   Tạo mới nhân viên</a>
               </div>
-              <div class="col-sm-2">
+              <!-- <div class="col-sm-2">
                 <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i
                     class="fas fa-file-upload"></i> Tải từ file</a>
               </div>
@@ -150,24 +149,24 @@
               </thead>
               <tbody>
                 <?php $cnt = 0; ?>
-                <?php foreach($users as $user){ ?>
+                <?php foreach($Customers as $user){ ?>
                 <?php $cnt ++; ?>
                 <tr>
                   <td width="10"><?php echo $cnt; ?></td>
-                  <td><?php echo $user['id_khachhang']; ?></td>
-                  <td><?php echo $user['taikhoan']; ?></td>
-                  <td><?php echo $user['hovaten']; ?></td>
+                  <td><?php echo $user['id']; ?></td>
+                  <td><?php echo $user['name_account']; ?></td>
+                  <td><?php echo $user['last_name']. " ".$user['first_name']; ?></td>
                   <!-- <td><img class="img-card-person" src="/img-anhthe/1.jpg" alt=""></td> -->
-                  <td><?php echo $user['diachi']; ?></td>
-                  <td><?php echo date_format(date_create($user['ngaySinh']),"d/m/Y") ?></td>
-                  <td><?php echo $user['gioiTinh'] == 1 ? "Nam" : "Nữ" ?></td>
-                  <td><?php echo $user['sodienthoai']; ?></td>
+                  <td><?php echo $user['address']; ?></td>
+                  <td><?php echo date_format(date_create($user['birthday']),"d-m-Y") ?></td>
+                  <td><?php echo $user['gender'] == 1 ? "Nam" : "Nữ" ?></td>
+                  <td><?php echo $user['phone']; ?></td>
                   <td><?php echo $user['email']; ?></td>
                   <td class="table-td-center">
-                    <!-- <a href="../process/process_delete_user.php?id=<?php echo $user['id_khachhang'] ?>" 
+                    <a href="/admin/QuanLyKH/?DeleteID=<?php echo $user['id'] ?>" 
                           class="btn trash"title="Xóa"><i class="fas fa-trash-alt"></i>
-                    </a> -->
-                    <a class="btn btn-primary btn-sm edit" href="?id=<?php echo $user['id_khachhang']; ?>" title="Đặt lại mật khẩu" id="show-emp"
+                    </a>
+                    <a class="btn btn-primary btn-sm edit" href="/admin/QuanLyKH/?updateID=<?php echo $user['id']; ?>" title="Đặt lại mật khẩu" id="show-emp"
                       ><i class="fas fa-edit"></i>
                     </a>
                   </td>
@@ -190,21 +189,22 @@
 -->
 
   <!-- Essential javascripts for application to work-->
-  <script src="../../../public/assets/admin/js/close_modal.js"></script>
-  <script src="../../../public/assets/admin/js2/jquery-3.2.1.min.js"></script>
-  <script src="../../../public/assets/admin/js2/popper.min.js"></script>
-  <script src="../../../public/assets/admin/js2/bootstrap.min.js"></script>
+    <!-- Essential javascripts for application to work-->
+    <script src="/public/assets/admin/js/close_modal.js"></script>
+  <script src="/public/assets/admin/js2/jquery-3.2.1.min.js"></script>
+  <script src="/public/assets/admin/js2/popper.min.js"></script>
+  <script src="/public/assets/admin/js2/bootstrap.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="src/jquery.table2excel.js"></script>
-  <script src="../../../public/assets/admin/js2/main.js"></script>
+  <script src="/public/assets/admin/js2/main.js"></script>
   <!-- The javascript plugin to display page loading on top-->
-  <script src="../../../public/assets/admin/js2/plugins/pace.min.js"></script>
+  <script src="/public/assets/admin/plugins/pace.min.js"></script>
   <!-- Page specific javascripts-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <!-- Data table plugin-->
-  <script type="text/javascript" src="../../../public/assets/admin/js2/plugins/jquery.dataTables.min.js"></script>
-  <script type="text/javascript" src="../../../public/assets/admin/js2/plugins/dataTables.bootstrap.min.js"></script>
-  <script type="text/javascript">$('#sampleTable').DataTable();</script>
+  <script type="text/javascript" src="/public/assets/admin/plugins/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="/public/assets/admin/plugins/dataTables.bootstrap.min.js"></script>
+  <script type="text/javascript"> </script>
   <script>
     function deleteRow(r) {
       var i = r.parentNode.parentNode.rowIndex;

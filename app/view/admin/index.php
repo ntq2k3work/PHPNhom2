@@ -1,5 +1,5 @@
 <?php 
-    // session_start();
+    // session_start(); 
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -26,11 +26,11 @@
 </head>
 
 <body>
-    <?php 
-        // if(isset($_SESSION['ERROR'])){
-        //     require "./notification/noti_error.php";
-        //     unset($_SESSION['ERROR']);
-        // }
+    <?php
+        if(isset($_SESSION['ERROR'])){
+            require "app/view/admin/notification/noti_error.php";
+            unset($_SESSION['ERROR']);
+        }
     ?>
     <div class="limiter">
         <div class="container-login100">
@@ -39,7 +39,7 @@
                     <img src="/public/assets/admin/images/team.jpg" alt="IMG">
                 </div>
                 <!--=====TIÊU ĐỀ======-->
-                <form class="login100-form validate-form" method="post" action="./process/process_login.php">
+                <form class="login100-form validate-form" method="post" action="/admin/checklog">
                     <span class="login100-form-title">
                         <b>ĐĂNG NHẬP ADMIN</b>
                     </span>
@@ -47,7 +47,7 @@
                     <form >
                         <div class="wrap-input100 validate-input">
                             <input class="input100" type="text" placeholder="Tài khoản quản trị" name="username"
-                                id="username">
+                                id="username" >
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class='bx bx-user'></i>

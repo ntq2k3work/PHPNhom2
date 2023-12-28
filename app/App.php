@@ -26,15 +26,16 @@ class App{
     public function handleUrl(): void
     {
         $url = $this ->getUrl();
+
         $urlArr = array_filter(explode('/',$url)); // Lấy ra list url
         $urlArr = array_values($urlArr); // Trả về url rỗng
 //        Xử lí controller
-
         if(!empty($urlArr[0])){
             $this -> __controller = ucfirst($urlArr[0]);
         }else{
             $this -> __controller = ucfirst($this -> __controller);
         }
+
         $Get_Controller = ($this ->__controller).'Controller';
         if(file_exists('app/controller/'.$Get_Controller. '.php')){
             require 'controller/'.$Get_Controller. '.php'; //Gọi controller

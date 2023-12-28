@@ -1,12 +1,15 @@
-<?php
-    echo "<pre>";
-    print_r((array)$sameProducts);
-    echo "</pre>";
+<?php 
+if(isset($_SESSION["quantity"])){
+    unset($_SESSION["quantity"]);
+    // $_SESSION["success"] = "Thêm thành công";
+    // unset($_SESSION["success"]);
+} 
+
 ?>
 <section class="container-lg" id="margin_header" style="margin-top: calc( var(--height) + 20px );">
     <div class="row">
         <!-- side product suggestions  -->
-        <div class="col-lg-3 d-lg-block d-none">
+        <!-- <div class="col-lg-3 d-lg-block d-none">
             <h4>Sản phẩm</h4>
             <div
                 style="height: 3px; display: block;background-color: rgba(0,0,0,0.1);margin: 1em 0 1em; width: 100%;">
@@ -55,9 +58,9 @@
                     </a>
                 </li>
             </ul>
-        </div>
+        </div> -->
         <!-- product information -->
-        <div class="col-lg-9">
+        <div class="">
             <div class="d-flex justify-content-center flex-column flex-lg-row mb-5">
                 <!-- product image -->
                 <div class="col-lg-5 position-relative">
@@ -65,7 +68,7 @@
                         $dateStart = new DateTime($infoProduct['time_start'] ?? "1-1-2999");
                         $dateFinish = new DateTime($infoProduct['time_finish'] ?? "1-1-2998");
                         $now = new DateTime();
-                        if ($dateStart <= $now && $now <= $dateFinish) {
+                        if ($dateStart > $dateFinish) {
                             $infoProduct['percent'] = 0;
                         }    
                     ?>
@@ -73,7 +76,7 @@
                         <span class="badge bg-danger ms-3 position-absolute fs-4"><?php echo -$infoProduct['percent'] ?>%</span>
                     <?php } ?>
                     <img class="w-100"
-                        src="https://mauweb.monamedia.net/dongho/wp-content/uploads/2018/03/dong-ho-casio-ga-110gb-1adr-nam-pin-day-nhua-600x600.jpg"
+                        src="/public/assets/client/img/image_product/<?php echo $infoProduct['image'] ?>"
                         alt="" />
                 </div>
                 <!-- product desciption -->
@@ -108,27 +111,27 @@
                     </p>
                     <strong class="m-1">Mô tả :</strong>
                     <p class="m-2"><?php echo $infoProduct['description'] ?></p>
-                    <form class="input-group mb-3">
+                    <form class="input-group mb-3" action="/cart/addToCart/<?php echo $infoProduct['product_id'] ?>" method="post">
                         <div class="col-lg-3 mb-3 me-3">
                             <div class="input-group">
                                 <span class="input-group-btn">
                                     <button type="button" class="quantity-left-minus btn btn-light border fs-5"
-                                        data-type="minus" data-field="">
+                                        data-type="minus" data-field=""  onclick="subtractQuantity(<?php echo $infoProduct['product_id'] ?>)">
                                         -
                                     </button>
                                 </span>
-                                <input type="text" id="quantity" name="quantity"
-                                    class="form-control input-number text-center" value="1" min="1" max="100">
+                                <input type="text" id="quantityInput" name="quantity"
+                                    class="form-control input-number text-center" value="1" min="1" max="<?php echo $infoProduct['quantity'] ?>">
                                 <span class="input-group-btn">
                                     <button type="button" class="quantity-right-plus btn btn-light border fs-5"
-                                        data-type="plus" data-field="">
+                                        data-type="plus" data-field="" onclick="addQuantity(<?php echo $infoProduct['product_id'] ?>)"> 
                                         +
                                     </button>
                                 </span>
                             </div>
                         </div>
                         <div class="input-group-append">
-                            <button class="btn btn-dark fs-5" type="button">Đặt hàng</button>
+                            <button class="btn btn-dark fs-5" type="submit">Đặt hàng</button>
                         </div>
                     </form>
                     <div class="mt-5">
@@ -145,11 +148,11 @@
                             data-bs-target="#detail-tab-pane" type="button" role="tab"
                             aria-controls="detail-tab-pane" aria-selected="true">Thông tin bổ sung</button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <!-- <li class="nav-item" role="presentation">
                         <button class="nav-link text-black" id="review-tab" data-bs-toggle="tab"
                             data-bs-target="#review-tab-pane" type="button" role="tab"
                             aria-controls="review-tab-pane" aria-selected="false">Đánh giá</button>
-                    </li>
+                    </li> -->
                     <li class="nav-item" role="presentation">
                         <button class="nav-link text-black" id="warranty-tab" data-bs-toggle="tab"
                             data-bs-target="#warranty-tab-pane" type="button" role="tab"
@@ -177,14 +180,7 @@
                                             <a class="link-dark link-underline-opacity-0" href="" rel="tag"><?php echo $infoProduct['wire_material'] ?></a>
                                         </td>
                                     </tr>
-                                    <?php if($infoProduct['name_categories'] != "Phụ kiện"){ ?>
-                                        <tr>
-                                            <th>Chất liệu mặt kính</th>
-                                            <td>
-                                                <a class="link-dark link-underline-opacity-0" href="" rel="tag"><?php echo $infoProduct['glass_material'] ?></a>
-                                            </td>
-                                        </tr>
-                                    <?php } ?>
+
                                     <?php if($infoProduct['name_categories'] != "Phụ kiện"){ ?>
                                         <tr>
                                             <th>Giới tính</th>
@@ -237,7 +233,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="review-tab-pane" role="tabpanel" aria-labelledby="review-tab"
+                    <!-- <div class="tab-pane fade" id="review-tab-pane" role="tabpanel" aria-labelledby="review-tab"
                         tabindex="0">
                         <div class="p-4 border-top-0" style="border: 1px solid #ddd; background-color: #fff;">
                             <h3>Đánh giá</h3>
@@ -266,7 +262,7 @@
                                 </div>
                             </form>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="tab-pane fade" id="warranty-tab-pane" role="tabpanel" aria-labelledby="warranty-tab"
                         tabindex="0">
                         <div class="p-4 border-top-0" style="border: 1px solid #ddd; background-color: #fff;">
@@ -293,23 +289,23 @@
                         $dateStart = new DateTime($key['time_start'] ?? "1-1-2999");
                         $dateFinish = new DateTime($key['time_finish'] ?? "1-1-2998");
                         $now = new DateTime();
-                        if ($dateStart <= $now && $now <= $dateFinish) {
+                        if ($dateStart > $dateFinish) {
                             $key['percent'] = 0;
                         }    
                     ?>
-                    <li class="item text-center w-25">
+                    <li class="item text-center w-25" style="flex: none;">
                         <button class="item_add_cart" title="Thêm vào giỏ hàng" type="submit">
                             <a href="" style="color: #000;"><i class="fa-solid fa-cart-plus"></i></a>
                         </button>
                         <a href="<?php echo $key['product_id'] ?>" style="min-height: auto;">
-                        <?php if($key['percent'] > 0){ ?>
-                            <div class="sale_down">
-                                <?php echo -$key['percent'] ?> %
-                            </div>
-                        <?php } ?>
+                            <?php if($key['percent'] > 0){ ?>
+                                <div class="sale_down">
+                                    <?php echo -$key['percent'] ?> %
+                                </div>
+                            <?php } ?>
                             <div class="item_main">
                                 <div class="item_img">
-                                    <img class="w-100" src="/public/assets/client/img/item_1.jpg" alt="">
+                                    <img class="w-100" src="/public/assets/client/img/image_product/<?php echo $key['image'] ?>" alt="">
                                 </div>
                                 <div class="item_categories small text-uppercase m-1"><?php echo $key['name_categories'] ?></div>
                                 <div class="item_name m-1"><?php echo $key['name_product'] ?></div>

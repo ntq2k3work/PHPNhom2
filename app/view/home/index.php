@@ -1,3 +1,10 @@
+
+<?php
+    if(isset($_SESSION['ERROR'])){
+        echo "<script>alert('Đăng nhập để thực hiện chức năng này !')</script>";
+        unset($_SESSION['ERROR']);
+    }
+?>
 <!-- Slider -->
 <div id="slider">
     <div class="slider_pre_next">
@@ -34,7 +41,7 @@
                 ?>
                 <li class="item text-center w-25">
                     <button class="item_add_cart" title="Thêm vào giỏ hàng" type="submit">
-                        <a href="" style="color: #000;"><i class="fa-solid fa-cart-plus"></i></a>
+                        <a href="product/detail/<?php echo $key['id'] ?>" style="color: #000;"><i class="fa-solid fa-cart-plus"></i></a>
                     </button>
                     <a href="product/detail/<?php echo $key['id'] ?>" style="display: block;">
                         <?php if ($key['percent'] > 0) { ?>
@@ -44,7 +51,7 @@
                         <?php } ?>
                         <div class="item_main">
                             <div class="item_img">
-                                <img class="w-100" src="/public/assets/client/img/item_1.jpg" alt="">
+                                <img class="w-100" src="/public/assets/client/img/image_product/<?php echo $key['image'] ?>" alt="">
                             </div>
                             <div class="item_categories small text-uppercase m-1"><?php echo $key['name_categories'] ?></div>
                             <div class="item_name m-1"><?php echo $key['name_product'] ?></div>
@@ -54,12 +61,12 @@
                                     <del class="item_cost_old cl_old "><?php echo number_format($key['price'], 0, '', '.') . "đ"; ?></del>
                                 <?php } ?>
                                 <p class="item_cost_new"><?php
-                                                            if ($key['percent'] > 0) {
-                                                                echo number_format(($key['price'] * (100 - $key['percent']) / 100), 0, '', '.') . " đ";
-                                                            } else {
-                                                                echo number_format($key['price'], 0, '', '.') . " đ";
-                                                            }
-                                                            ?></p>
+                                if ($key['percent'] > 0) {
+                                    echo number_format(($key['price'] * (100 - $key['percent']) / 100), 0, '', '.') . " đ";
+                                } else {
+                                    echo number_format($key['price'], 0, '', '.') . " đ";
+                                }
+                                ?></p>
                             </div>
                         </div>
                     </a>
@@ -105,7 +112,7 @@
                 ?>
                 <li class="item text-center w-25">
                     <button class="item_add_cart" title="Thêm vào giỏ hàng" type="submit">
-                        <a href="" style="color: #000;"><i class="fa-solid fa-cart-plus"></i></a>
+                        <a href="product/detail/<?php echo $key['id'] ?>" style="color: #000;"><i class="fa-solid fa-cart-plus"></i></a>
                     </button>
                     <a href="product/detail/<?php echo $key['id'] ?>" style="display: block;">
                         <?php if ($key['percent'] > 0) { ?>
@@ -115,7 +122,7 @@
                         <?php } ?>
                         <div class="item_main">
                             <div class="item_img">
-                                <img class="w-100" src="/public/assets/client/img/item_1.jpg" alt="">
+                                <img class="w-100" src="/public/assets/client/img/image_product/<?php echo $key['image'] ?>" alt="">
                             </div>
                             <div class="item_categories small text-uppercase m-1"><?php echo $key['name_categories'] ?></div>
                             <div class="item_name m-1"><?php echo $key['name_product'] ?></div>
@@ -125,12 +132,12 @@
                                     <del class="item_cost_old cl_old "><?php echo number_format($key['price'], 0, '', '.') . "đ"; ?></del>
                                 <?php } ?>
                                 <p class="item_cost_new"><?php
-                                                            if ($key['percent'] > 0) {
-                                                                echo number_format(($key['price'] * (100 - $key['percent']) / 100), 0, '', '.') . " đ";
-                                                            } else {
-                                                                echo number_format($key['price'], 0, '', '.') . " đ";
-                                                            }
-                                                            ?></p>
+                                    if ($key['percent'] > 0) {
+                                        echo number_format(($key['price'] * (100 - $key['percent']) / 100), 0, '', '.') . " đ";
+                                    } else {
+                                        echo number_format($key['price'], 0, '', '.') . " đ";
+                                    }
+                                ?></p>
                             </div>
                         </div>
                     </a>
@@ -164,7 +171,7 @@
                         ?>
                         <li class="item text-center w-25">
                             <button class="item_add_cart" title="Thêm vào giỏ hàng" type="submit">
-                                <a href="" style="color: #000;"><i class="fa-solid fa-cart-plus"></i></a>
+                                <a href="product/detail/<?php echo $key['id'] ?>" style="color: #000;"><i class="fa-solid fa-cart-plus"></i></a>
                             </button>
                             <a class="item_link" href="product/detail/<?php echo $key['id'] ?>">
                                 <?php if ($key['percent'] > 0) { ?>
@@ -174,7 +181,7 @@
                                 <?php } ?>
                                 <div class="item_main">
                                     <div class="item_img">
-                                        <img class="w-100" src="/public/assets/client/img/item_1.jpg" alt="">
+                                        <img class="w-100" src="/public/assets/client/img/image_product/<?php echo $key['image'] ?>" alt="">
                                     </div>
                                     <div class="item_categories small text-uppercase m-1"><?php echo $key['name_categories'] ?></div>
                                     <div class="item_name m-1"><?php echo $key['name_product'] ?></div>
@@ -183,12 +190,12 @@
                                             <del class="item_cost_old cl_old "><?php echo number_format($key['price'], 0, '', '.') . "đ"; ?></del>
                                         <?php } ?>
                                         <p class="item_cost_new"><?php
-                                            if ($key['percent'] > 0) {
-                                                echo number_format(($key['price'] * (100 - $key['percent']) / 100), 0, '', '.') . " đ";
-                                            } else {
-                                                echo number_format($key['price'], 0, '', '.') . " đ";
-                                            }
-                                        ?></p>
+                                                                    if ($key['percent'] > 0) {
+                                                                        echo number_format(($key['price'] * (100 - $key['percent']) / 100), 0, '', '.') . " đ";
+                                                                    } else {
+                                                                        echo number_format($key['price'], 0, '', '.') . " đ";
+                                                                    }
+                                                                    ?></p>
                                     </div>
                                 </div>
                             </a>
@@ -199,5 +206,4 @@
         </div>
     </section>
 </div>
-<script src="/public/assets/client/js/slider_action.js"></script>
-<script src="/public/assets/client/js/show_item.js"></script>
+

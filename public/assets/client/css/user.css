@@ -1,0 +1,34 @@
+.user_form{
+    position: absolute;
+    top: calc( 100% + 16px );
+    right: 80%;
+    transform: translateX(20%);
+    background-color: #fff;
+    width: 350px;
+    padding: 16px 0;
+    box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.1);
+    color: #677279;
+    display: none;
+    border-radius: 5px;
+}
+.user_name{
+    text-align: center;
+    font-size: 18px;
+    color: #000;
+    margin: 10px 0;
+}
+.user_form ul{
+    padding-left: 10px;
+}
+.user_form ul>li{
+    list-style: circle;
+    /* padding-left: 10px; */
+}
+.user_information{
+    margin-left: 16px;
+}
+.user_information a{
+    text-decoration: none;
+    padding: 8px 0;
+    display: block;
+}

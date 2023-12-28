@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Main CSS-->
-  <link rel="stylesheet" type="text/css" href="public/assets/admin/css/cssadmin/main.css">
+  <link rel="stylesheet" type="text/css" href="/public/assets/admin/css/cssadmin/main.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
   <!-- or -->
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -22,17 +22,10 @@
 
 <!-- PHP -->
   <?php 
-      // require "checkLog.php";
-      // require "configs/connect.php";
-      // $sql_count_KH = "select count(*) from tbl_dangky";
-      // $count_KH = mysqli_fetch_array(mysqli_query($cn,$sql_count_KH));
-      // $sql_count_SP = "select count(*) from tbl_sanpham";
-      // $count_SP = mysqli_fetch_array(mysqli_query($cn,$sql_count_SP));
-      // $sql_count_DonHang = "select count(*) from tbl_cart_detail";
-      // $count_DonHang = mysqli_fetch_array(mysqli_query($cn,$sql_count_DonHang));
-      // require "../process/getCartDetail.php";
-      // $sql_get_top_10_user = "select * from tbl_dangky order by id_khachhang desc limit 5";
-      // $users = mysqli_query($cn,$sql_get_top_10_user);
+      if(!isset($_SESSION['acAdmin'])){
+        header("location:/admin");
+        exit;
+      }
   ?>
 
 <!--  -->
@@ -46,7 +39,7 @@
 
 
       <!-- User Menu-->
-      <li><a class="app-nav__item" href="../process/process_logout.php"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+      <li><a class="app-nav__item" href="/admin/logout"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
       </li>
     </ul>
@@ -63,18 +56,18 @@
     </div>
     <hr>
     <ul class="app-menu">
-      <li><a class="app-menu__item active" href=""><i class='app-menu__icon bx bx-tachometer'></i><span
-            class="app-menu__label">Bảng điều khiển</span></a></li>
-      <li><a class="app-menu__item " href="admin/QuanLyKH"><i class='app-menu__icon bx bx-id-card'></i> <span
+      <li><a class="app-menu__item active" href="/admin/dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
+            class="app-menu__label">Thống kê</span></a></li>
+      <li><a class="app-menu__item " href="/admin/QuanLyKH"><i class='app-menu__icon bx bx-id-card'></i> <span
             class="app-menu__label">Quản lý khách hàng</span></a></li>
 
-      <li><a class="app-menu__item" href="admin/QuanLySP"><i
+      <li><a class="app-menu__item" href="/admin/QuanLySP"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
       </li>
-      <li><a class="app-menu__item" href="admin/QuanLyDonHang"><i class='app-menu__icon bx bx-task'></i><span
+      <li><a class="app-menu__item" href="/admin/QuanLyDonHang"><i class='app-menu__icon bx bx-task'></i><span
             class="app-menu__label">Quản lý đơn hàng</span></a></li>
-      <li><a class="app-menu__item" href="admin/QuanLyDanhMuc"><i class='app-menu__icon bx bx-dollar'></i><span
-            class="app-menu__label">Quản lý danh mục</span></a></li>
+      <li><a class="app-menu__item" href="/admin/QuanLyThuongHieu"><i class='app-menu__icon bx bx-dollar'></i><span
+            class="app-menu__label">Quản lý thương hiệu</span></a></li>
 
     </ul>
   </aside>
@@ -98,7 +91,7 @@
         <div class="widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
           <div class="info">
             <h4>Tổng khách hàng</h4>
-            <p><b><?php echo $count_KH['count(*)'] ?> khách hàng</b></p>
+            <p><b><?php echo $Quantity_KH ?> khách hàng</b></p>
             <p class="info-tong">Tổng số khách hàng được quản lý.</p>
           </div>
         </div>
@@ -108,7 +101,7 @@
             <div class="widget-small info coloured-icon"><i class='icon bx bxs-data fa-3x'></i>
               <div class="info">
                 <h4>Tổng sản phẩm</h4>
-                <p><b><?php echo $count_SP['count(*)'] ?> sản phẩm</b></p>
+                <p><b><?php echo $Quantity_Product?> sản phẩm</b></p>
                 <p class="info-tong">Tổng số sản phẩm được quản lý.</p>
               </div>
             </div>
@@ -118,7 +111,7 @@
             <div class="widget-small warning coloured-icon"><i class='icon bx bxs-shopping-bags fa-3x'></i>
               <div class="info">
                 <h4>Tổng đơn hàng</h4>
-                <p><b><?php echo $count_DonHang['count(*)'] ?> đơn hàng</b></p>
+                <p><b><?php echo $Quantity_Bill ?> đơn hàng</b></p>
                 <p class="info-tong">Tổng số hóa đơn bán hàng trong tháng.</p>
               </div>
             </div>
@@ -136,7 +129,7 @@
            <!-- col-12 -->
            <div class="col-md-12">
             <div class="tile">
-                <h3 class="tile-title">Tình trạng đơn hàng</h3>
+                <h3 class="tile-title">Khách hàng tiềm năng</h3>
               <div>
                 <table class="table table-bordered">
                   <thead>
@@ -149,12 +142,12 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <?php foreach($each as $row ){ ?>
+                    <?php foreach($Bills as $row ){ ?>
                       <tr>
-                        <td><?php echo $row['code_cart'] ?></td>
-                        <td><?php echo $row['nguoimua']; ?></td>
-                        <td><?php echo number_format($row['soluongmua'] * $row['giasanpham'],0,'.') ?></td>
-                        <td>Nguyễn Trung Quân</td>
+                        <td><?php echo $row['id'] ?></td>
+                        <td><?php echo $row['last_name']. " ".$row['first_name']; ?></td>
+                        <td><?php echo number_format($row['Tongtien'],0,'.') ?></td>
+                        <td><?php echo date_format(date_create($row['time_buy']),"d-m-Y") ?></td>
                         <td><span class="badge bg-success">Đã hoàn thành</span></td>
                       </tr>
                     <?php } ?>
@@ -178,16 +171,18 @@
                         <th>Tài khoản</th>
                         <th>Ngày sinh</th>
                         <th>Số điện thoại</th>
+                        <th>Địa chỉ</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <?php foreach($users as $user){ ?>
+                      <?php foreach($Customers as $user){ ?>
                       <tr>
-                        <td><?php echo $user['id_khachhang'] ?></td>
-                        <td><?php echo $user['hovaten'] ?></td>
-                        <td><?php echo $user['taikhoan'] ?></td>
-                        <td><?php echo $user['ngaySinh'] ?></td>
-                        <td><span class="tag tag-success"><?php echo $user['sodienthoai'] ?></span></td>
+                        <td><?php echo $user['id'] ?></td>
+                        <td><?php echo $user['last_name'] ." ". $user['first_name'] ?></td>
+                        <td><?php echo $user['name_account'] ?></td>
+                        <td><?php echo $user['birthday'] ?></td>
+                        <td><span class="tag tag-success"><?php echo $user['phone'] ?></span></td>
+                        <td><?php echo $user['address'] ?></td>
                       </tr>
                       <?php } ?>
                     </tbody>
@@ -232,18 +227,18 @@
       </b></p>
     </div>
   </main>
-  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="/public/assets/admin/js2/jquery-3.2.1.min.js"></script>
   <!--===============================================================================================-->
-  <script src="js/popper.min.js"></script>
+  <script src="/public/assets/admin/js2/popper.min.js"></script>
   <script src="https://unpkg.com/boxicons@latest/dist/boxicons.js"></script>
   <!--===============================================================================================-->
-  <script src="js/bootstrap.min.js"></script>
+  <script src="/public/assets/admin/js2/bootstrap.min.js"></script>
   <!--===============================================================================================-->
-  <script src="js/main.js"></script>
+  <script src="/public/assets/admin/js2/main.js"></script>
   <!--===============================================================================================-->
-  <script src="js/plugins/pace.min.js"></script>
+  <script src="/public/assets/admin/js2/plugins/pace.min.js"></script>
   <!--===============================================================================================-->
-  <script type="text/javascript" src="js/plugins/chart.js"></script>
+  <script type="text/javascript" src="/public/assets/admin/js2/plugins/chart.js"></script>
   <!--===============================================================================================-->
   <script type="text/javascript">
     var data = {

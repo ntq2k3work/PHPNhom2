@@ -12,6 +12,6 @@ class errorMess
     }
     public function Loi(): void
     {
-        echo "Lỗi</br>";
+        echo "Lỗi rồi</br>";
     }
 }

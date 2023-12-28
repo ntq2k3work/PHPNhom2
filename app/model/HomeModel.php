@@ -1,12 +1,11 @@
 <?php
-require_once './configs/connect.php';
+// require_once './configs/connect.php';
 class HomeModel
 {
 //    Lấy danh sachs theo danh mục
 
     public function getProduct($params)
     {
-        $connect = (new connect()) ->cn();
         if(!empty($params)){
             $sql_select = "select products.*,name_categories,percent,time_start,time_finish from products 
             inner join categories on products.id_categories = categories.id_categories  
@@ -18,7 +17,8 @@ class HomeModel
                         inner join discount on products.id = discount.id_product
             ";
         }
-        $result = mysqli_query($connect,$sql_select);
+        $result = (new connect()) ->query($sql_select);
         return $result;
     }
+    
 }
